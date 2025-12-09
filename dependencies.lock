@@ -1,0 +1,15 @@
+dependencies:
+  espressif/arduino-esp32:
+    component_hash: null
+    source:
+      path: /home/ethan/Projects/eink_ancs/components/espressif__arduino-esp32
+      type: local
+    version: 2.0.14
+  idf:
+    component_hash: null
+    source:
+      type: idf
+    version: 4.4.8
+manifest_hash: 4d07d303331037494260ed7b38b45140eb0e8d4293961d46970a40faa9dddd1c
+target: esp32s3
+version: 1.0.0
