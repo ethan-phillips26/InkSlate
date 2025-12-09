@@ -1,6 +1,0 @@
-source "/home/ethan/esp/esp-idf-v4.4/components/app_update/Kconfig.projbuild"
-source "/home/ethan/esp/esp-idf-v4.4/components/bootloader/Kconfig.projbuild"
-source "/home/ethan/esp/esp-idf-v4.4/components/esp_rom/Kconfig.projbuild"
-source "/home/ethan/esp/esp-idf-v4.4/components/esptool_py/Kconfig.projbuild"
-source "/home/ethan/esp/esp-idf-v4.4/components/partition_table/Kconfig.projbuild"
-source "/home/ethan/Projects/eink_ancs/components/espressif__arduino-esp32/Kconfig.projbuild"
