@@ -1,6 +1,6 @@
 # InkSlate
 
-An ESP32-S3 based e-ink project, build using ESP-IDF with Arduino as a component.
+An ESP32-S3 based e-ink project, built using ESP-IDF with Arduino as a component.
 
 The goal is to build a customizable notification e-ink display utilizing BLE ANCS.
 
