@@ -25,16 +25,20 @@ extern "C" void ble_ancs_start(void);
 int notificationX = 20;
 int notificationY = 70;
 const int NOTIF_LINE_HEIGHT = 30;
-const int NOTIF_BOX_HEIGHT = 40;
+const int NOTIF_BOX_HEIGHT = 30;
+
+void drawCurrentTime() {
+    display.setFont(&FreeSans12pt7b);
+    display.setCursor(660, display.height() - 40);
+    display.print("12:23 PM");
+}
 
 void setup() {
     Serial.begin(115200);
-    Serial.println("setup() starting…");
 
     // Use custom SPI pins from S3
     SPI.begin(EPD_SCK, EPD_MISO, EPD_MOSI);
 
-    Serial.println("Init display…");
     display.init(115200, true, 2, false);
     display.setRotation(2);
     display.setFullWindow();
@@ -50,10 +54,9 @@ void setup() {
         display.setCursor(10, 28);
         display.print("Notifications:");
 
-        // Time
-        display.setFont(&FreeSans12pt7b);
-        display.setCursor(660, display.height() - 40);
-        display.print("12:23 PM");
+        display.setTextColor(GxEPD_BLACK);
+
+        drawCurrentTime();
 
         // Timer
         display.setCursor(20, display.height() - 40);
@@ -67,20 +70,23 @@ void setup() {
 void loop() {
     if (g_notification_queue != nullptr) {
         notification_t n;
+
         // Removes notification from queue.
         if (xQueueReceive(g_notification_queue, &n, 0) == pdTRUE) {
-            Serial.printf("New: [%s] %s\n", n.title, n.message);
             String notification = String(n.title) + ": " + String(n.message);
+
                 int16_t windowX = 0;
                 int16_t windowY = notificationY - 25;
                 int16_t windowW = display.width();
                 int16_t windowH = NOTIF_BOX_HEIGHT;
 
-                if (windowY + windowH > display.height()) {
+                // Check if we need to reset to top of screen
+                if (windowY + windowH > display.height() - 60) {
                     windowY = 40;
                     notificationY = windowY + 25;
                 }
-                windowH = display.height() - windowY;
+
+                windowH = display.height() - windowY - 60;
                 
                 display.setPartialWindow(windowX, windowY, windowW, windowH);
                 display.firstPage();
@@ -141,4 +147,6 @@ void clearFullScreen() {
         display.fillScreen(GxEPD_WHITE);
     } while (display.nextPage());
 }
+
+
 
